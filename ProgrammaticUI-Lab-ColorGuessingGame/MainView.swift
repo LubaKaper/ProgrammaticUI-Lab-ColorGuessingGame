@@ -9,6 +9,12 @@
 import UIKit
 
 class MainView: UIView {
+    
+    public lazy var stackViewButton: UIStackView = {
+       let stackViewB = UIStackView()
+        stackViewB.backgroundColor = .systemTeal
+        return stackViewB
+    }()
 
     public lazy var colorView: UIView = {
         let view = UIView()
@@ -17,8 +23,14 @@ class MainView: UIView {
         return view
     }()
     
+    public lazy var buttonArr: [UIButton] = {
+       let arr = [redButton, greenButton, blueButton]
+        return arr
+    }()
+    
     public lazy var redButton: UIButton = {
        let redBut = UIButton()
+
         redBut.backgroundColor = .systemRed
         return redBut
     }()
@@ -28,6 +40,7 @@ class MainView: UIView {
         greenBut.backgroundColor = .systemGreen
         return greenBut
     }()
+    
     
     public lazy var blueButton: UIButton = {
        let blueBut = UIButton()
@@ -59,8 +72,9 @@ class MainView: UIView {
     
     private func commonInit() {
        setUpColorViewContstrains()
-        setUpRedButtonConstraints()
-        setUpBlueButtonConstraints()
+//        setUpRedButtonConstraints()
+//        setUpBlueButtonConstraints()
+        setUpStackViewConstaraints()
     }
     
     private func setUpColorViewContstrains() {
@@ -74,31 +88,59 @@ class MainView: UIView {
         ])
     }
     
-    private func setUpRedButtonConstraints() {
-        
-        addSubview(redButton)
-        redButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        
-        NSLayoutConstraint.activate([
-            
-            redButton.topAnchor.constraint(equalTo: colorView.bottomAnchor, constant: 30),
-            redButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-          redButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
-          redButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
-        ])
-        
-    }
+//    private func setUpRedButtonConstraints() {
+//
+//        addSubview(redButton)
+//        redButton.translatesAutoresizingMaskIntoConstraints = false
+//
+//
+//
+//        NSLayoutConstraint.activate([
+//
+//            redButton.topAnchor.constraint(equalTo: colorView.bottomAnchor, constant: 30),
+//            redButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+//          redButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
+//          redButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
+//        ])
+//
+//    }
+//
+//    private func setUpBlueButtonConstraints() {
+//        addSubview(blueButton)
+//        blueButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            blueButton.topAnchor.constraint(equalTo: colorView.bottomAnchor, constant: 30),
+//            blueButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+//            blueButton.trailingAnchor.constraint(equalTo: redButton.leadingAnchor, constant: 30)
+//
+//        ])
+//    }
     
-    private func setUpBlueButtonConstraints() {
-        addSubview(blueButton)
-        blueButton.translatesAutoresizingMaskIntoConstraints = false
+    private func setUpStackViewConstaraints() {
+        addSubview(stackViewButton)
+        stackViewButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let arr = [redButton, blueButton, greenButton]
+        
+        for button in arr{
+            stackViewButton.addArrangedSubview(button)
+        }
+        
         NSLayoutConstraint.activate([
-            blueButton.topAnchor.constraint(equalTo: colorView.bottomAnchor, constant: 30),
-            blueButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            blueButton.trailingAnchor.constraint(equalTo: redButton.leadingAnchor, constant: 30)
+//        stackViewButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+//        stackViewButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            stackViewButton.topAnchor.constraint(equalTo: colorView.bottomAnchor, constant: 20.0),
+            stackViewButton.heightAnchor.constraint(equalToConstant: 80),
+        stackViewButton.centerXAnchor.constraint(equalTo: colorView.centerXAnchor),
+        stackViewButton.widthAnchor.constraint(equalTo: colorView.widthAnchor, multiplier: 1)
+       // stackViewButton.bottomAnchor.constraint(equalTo: bottomAnchor)
             
-        ])
-    }
+       ] )
+        
+       // stackViewButton.axis = .horizontal
+        stackViewButton.distribution = .fillEqually
+        stackViewButton.spacing = 40.0
+       // stackViewButton.alignment = .center
+}
+    
 }
