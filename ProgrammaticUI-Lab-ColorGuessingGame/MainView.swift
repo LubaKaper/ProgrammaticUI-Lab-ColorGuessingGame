@@ -32,12 +32,14 @@ class MainView: UIView {
        let redBut = UIButton()
 
         redBut.backgroundColor = .systemRed
+        redBut.tag = 0
         return redBut
     }()
     
     public lazy var greenButton: UIButton = {
        let greenBut = UIButton()
         greenBut.backgroundColor = .systemGreen
+        greenBut.tag = 1
         return greenBut
     }()
     
@@ -45,11 +47,14 @@ class MainView: UIView {
     public lazy var blueButton: UIButton = {
        let blueBut = UIButton()
         blueBut.backgroundColor = .systemBlue
+        blueBut.tag = 2
         return blueBut
     }()
     
     public lazy var label: UILabel = {
         let mainLabel = UILabel()
+        mainLabel.numberOfLines = 0
+        mainLabel.textAlignment = .center
         mainLabel.backgroundColor = .systemPink
         return mainLabel
     }()
@@ -72,49 +77,11 @@ class MainView: UIView {
     
     private func commonInit() {
        setUpColorViewContstrains()
-//        setUpRedButtonConstraints()
-//        setUpBlueButtonConstraints()
+
         setUpStackViewConstaraints()
+        setUpLabelConstraints()
+        setUpResetButtonConstraints()
     }
-    
-    private func setUpColorViewContstrains() {
-        addSubview(colorView)
-        colorView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            colorView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            colorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            colorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            colorView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.40)
-        ])
-    }
-    
-//    private func setUpRedButtonConstraints() {
-//
-//        addSubview(redButton)
-//        redButton.translatesAutoresizingMaskIntoConstraints = false
-//
-//
-//
-//        NSLayoutConstraint.activate([
-//
-//            redButton.topAnchor.constraint(equalTo: colorView.bottomAnchor, constant: 30),
-//            redButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-//          redButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
-//          redButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
-//        ])
-//
-//    }
-//
-//    private func setUpBlueButtonConstraints() {
-//        addSubview(blueButton)
-//        blueButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            blueButton.topAnchor.constraint(equalTo: colorView.bottomAnchor, constant: 30),
-//            blueButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-//            blueButton.trailingAnchor.constraint(equalTo: redButton.leadingAnchor, constant: 30)
-//
-//        ])
-//    }
     
     private func setUpStackViewConstaraints() {
         addSubview(stackViewButton)
@@ -127,20 +94,49 @@ class MainView: UIView {
         }
         
         NSLayoutConstraint.activate([
-//        stackViewButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-//        stackViewButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+
             stackViewButton.topAnchor.constraint(equalTo: colorView.bottomAnchor, constant: 20.0),
             stackViewButton.heightAnchor.constraint(equalToConstant: 80),
         stackViewButton.centerXAnchor.constraint(equalTo: colorView.centerXAnchor),
         stackViewButton.widthAnchor.constraint(equalTo: colorView.widthAnchor, multiplier: 1)
-       // stackViewButton.bottomAnchor.constraint(equalTo: bottomAnchor)
             
        ] )
         
-       // stackViewButton.axis = .horizontal
         stackViewButton.distribution = .fillEqually
         stackViewButton.spacing = 40.0
-       // stackViewButton.alignment = .center
 }
+    
+    private func setUpLabelConstraints() {
+        addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: stackViewButton.bottomAnchor, constant: 30),
+            label.heightAnchor.constraint(equalToConstant: 80),
+            label.centerXAnchor.constraint(equalTo: stackViewButton.centerXAnchor),
+            label.widthAnchor.constraint(equalTo: stackViewButton.widthAnchor, multiplier: 0.5)
+        ])
+        
+    }
+    private func setUpColorViewContstrains() {
+        addSubview(colorView)
+        colorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            colorView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            colorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            colorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            colorView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.40)
+        ])
+    }
+    
+    private func setUpResetButtonConstraints() {
+        addSubview(resetButton)
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            resetButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 40),
+            resetButton.centerXAnchor.constraint(equalTo: label.centerXAnchor)
+        ])
+    }
+    
     
 }
